@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:learning_mob_x/di/getIt.dart';
+import 'package:learning_mob_x/models/user_model.dart';
 import 'package:learning_mob_x/presentation/pages/home/home_page.dart';
-import 'package:learning_mob_x/state/user.dart';
-import 'package:provider/provider.dart';
+import 'package:learning_mob_x/presentation/pages/login/login_page.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);
@@ -10,14 +12,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MultiProvider(
-        providers: [
-          Provider<User>(
-            create: (_) => User(),
-          ),
-        ],
-        child: const HomePage(),
-      ),
+      home: Observer(builder: (_) {
+        final userModel = getIt<UserModel>();
+        return userModel.isLogged ? const HomePage() : const LoginPage();
+      }),
     );
   }
 }
