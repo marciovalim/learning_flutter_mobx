@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:learning_mob_x/controllers/login_controller.dart';
+import 'package:learning_mob_x/di/locator.dart';
 import 'package:learning_mob_x/presentation/pages/login/login_text_field.dart';
+import 'package:learning_mob_x/presentation/viewmodels/login_viewmodel.dart';
+import 'package:learning_mob_x/presentation/viewmodels/user_viewmodel.dart';
 import 'package:learning_mob_x/presentation/widgets/small_progress_indicator.dart';
 
 class LoginForm extends StatefulWidget {
@@ -12,7 +14,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _controller = LoginController();
+  final _viewModel = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +24,14 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           LoginTextField(
             label: 'Name',
-            errorText: _controller.validateName,
-            onChanged: _controller.loginModel.setName,
+            errorText: _viewModel.validateName,
+            onChanged: _viewModel.setName,
           ),
           SizedBox(height: 30),
           LoginTextField(
             label: 'Password',
-            errorText: _controller.validatePassword,
-            onChanged: _controller.loginModel.setPassword,
+            errorText: _viewModel.validatePassword,
+            onChanged: _viewModel.setPassword,
           ),
           SizedBox(height: 60),
           Observer(builder: (_) {
@@ -39,8 +41,8 @@ class _LoginFormState extends State<LoginForm> {
               child: RaisedButton(
                 color: Colors.blue[400],
                 disabledColor: Colors.blue[200],
-                onPressed: _controller.isButtonPressable ? _requestLogin : null,
-                child: _controller.isLoginLoading
+                onPressed: _viewModel.isButtonPressable ? _requestLogin : null,
+                child: _viewModel.isLoginLoading
                     ? SmallProgressIndicator()
                     : Text(
                         'Login',
@@ -57,7 +59,8 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future<void> _requestLogin() async {
-    final isLogged = await _controller.login();
+    await _viewModel.login();
+    final isLogged = locator<UserViewModel>().isLogged;
     if (!isLogged) {
       // ignore: deprecated_member_use
       Scaffold.of(context).hideCurrentSnackBar();

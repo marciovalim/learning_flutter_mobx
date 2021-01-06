@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_model.dart';
+part of 'user_viewmodel.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'user_model.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$UserModel on _UserModelBase, Store {
-  final _$isLoggedAtom = Atom(name: '_UserModelBase.isLogged');
+mixin _$UserViewModel on _UserViewModelBase, Store {
+  final _$isLoggedAtom = Atom(name: '_UserViewModelBase.isLogged');
 
   @override
   bool get isLogged {
@@ -24,7 +24,7 @@ mixin _$UserModel on _UserModelBase, Store {
     });
   }
 
-  final _$likesAtom = Atom(name: '_UserModelBase.likes');
+  final _$likesAtom = Atom(name: '_UserViewModelBase.likes');
 
   @override
   int get likes {
@@ -39,35 +39,35 @@ mixin _$UserModel on _UserModelBase, Store {
     });
   }
 
-  final _$loginAsyncAction = AsyncAction('_UserModelBase.login');
+  final _$loginAsyncAction = AsyncAction('_UserViewModelBase.login');
 
   @override
-  Future<bool> login(String name, String password) {
+  Future<void> login(String name, String password) {
     return _$loginAsyncAction.run(() => super.login(name, password));
   }
 
-  final _$_UserModelBaseActionController =
-      ActionController(name: '_UserModelBase');
+  final _$_UserViewModelBaseActionController =
+      ActionController(name: '_UserViewModelBase');
 
   @override
   void logout() {
-    final _$actionInfo = _$_UserModelBaseActionController.startAction(
-        name: '_UserModelBase.logout');
+    final _$actionInfo = _$_UserViewModelBaseActionController.startAction(
+        name: '_UserViewModelBase.logout');
     try {
       return super.logout();
     } finally {
-      _$_UserModelBaseActionController.endAction(_$actionInfo);
+      _$_UserViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addLike() {
-    final _$actionInfo = _$_UserModelBaseActionController.startAction(
-        name: '_UserModelBase.addLike');
+    final _$actionInfo = _$_UserViewModelBaseActionController.startAction(
+        name: '_UserViewModelBase.addLike');
     try {
       return super.addLike();
     } finally {
-      _$_UserModelBaseActionController.endAction(_$actionInfo);
+      _$_UserViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
